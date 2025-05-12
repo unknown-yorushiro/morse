@@ -34,7 +34,8 @@ let alphabetMorseDict = {
     "y": "1011",
     "z": "1100",
 }
-
+let shortPoint = 100;
+let longPoint = shortPoint * 3;
 function morseCheck(inputMorse){
     let repMorse = [];
     let joinMorse = [];
@@ -49,10 +50,11 @@ function morseCheck(inputMorse){
         let tempList = [];
         if(repMorse[i] !== undefined){
             tempList = repMorse[i].split('');
-        }else if(repMorse[i] === undefined){
             tempList.push('');
+        }else if(repMorse[i] === undefined){
+            tempList.push('-1');
         }
-        tempList.push('');
+
         joinMorse = joinMorse.concat(tempList);
     }
     joinMorse.pop();
@@ -65,16 +67,17 @@ async function exeMorse(morseStr){
     alert(morseStr);
     for(let i=0; i<morseStr.length; i++){
         if(!morseStr[i]){
-            await sleep(200);
-        }else if(morseStr[i] == 1){
-            document.body.style.background = "red";
-            await sleep(400);
-            document.body.style.background = "white";
+            await sleep(shortPoint);
         }else if(morseStr[i] == 0){
             document.body.style.background = "red";
-            await sleep(200);
+            await sleep(shortPoint);
+            document.body.style.background = "white";
+        }else if(morseStr[i] == 1){
+            document.body.style.background = "red";
+            await sleep(longPoint);
             document.body.style.background = "white"; 
+        }else if(morseStr[i] == -1){
+            await sleep(longPoint);
         }
-        await sleep(100);
     }
 }
