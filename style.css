@@ -1,0 +1,19 @@
+#test {
+  color: gray;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+
+	font-family: "游ゴシック体", YuGothic, "游ゴシック Medium", "Yu Gothic Medium", "游ゴシック", "Yu Gothic", sans-serif;
+	/*フォント種類（ゴシック）*/
+	-webkit-text-size-adjust: none;
+	background: white;
+	/*背景色*/
+	color: black;
+	/*文字色*/
+	line-height: 2;
+	/*行間*/
+	overflow-x: hidden;
+}
