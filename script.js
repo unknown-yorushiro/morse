@@ -38,7 +38,9 @@ let alphabetMorseDict = {
 function morseCheck(inputMorse){
     let repMorse = [];
     let joinMorse = [];
+    inputMorse = inputMorse.toLowerCase();
     let splitStr = inputMorse.split('');
+
     for(let i=0; i<splitStr.length; i++){
         repMorse[i] = alphabetMorseDict[splitStr[i]];
     }
