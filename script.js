@@ -64,7 +64,7 @@ function morseCheck(inputMorse){
 async function exeMorse(morseStr){
     alert(morseStr);
     for(let i=0; i<morseStr.length; i++){
-        if(morseStr[i]){
+        if(!morseStr[i]){
             await sleep(200);
         }else if(morseStr[i] == 1){
             document.body.style.background = "red";
