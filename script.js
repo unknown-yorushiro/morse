@@ -69,12 +69,12 @@ async function exeMorse(morseStr){
         }else if(morseStr[i] == 1){
             document.body.style.background = "red";
             await sleep(400);
+            document.body.style.background = "white";
         }else if(morseStr[i] == 0){
             document.body.style.background = "red";
             await sleep(200);
+            document.body.style.background = "white"; 
         }
-
-        document.body.style.background = "white";
         await sleep(100);
     }
 }
