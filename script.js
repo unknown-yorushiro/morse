@@ -34,9 +34,16 @@ let alphabetMorseDict = {
     "y": "1011",
     "z": "1100",
 }
+
+let morseText = document.getElementById('morseString');
+morseText.value = 'SOS';
+let morseButton = document.getElementById('morseButton');
+
 let shortPoint = 100;
 let longPoint = shortPoint * 3;
-function morseCheck(inputMorse){
+function parseMorse(){
+    let inputMorse = morseText.value;
+    alert(inputMorse)
     let repMorse = [];
     let joinMorse = [];
     inputMorse = inputMorse.toLowerCase();
