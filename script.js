@@ -83,6 +83,8 @@ const morseSound = document.getElementById('morse');
 morseText.value = 'SOS';
 wordTypeElement[0].checked = true;
 
+/* 処理実行中フラグ */
+let isMorseExe = false;
 
 //================================
 // sleep処理用定義
@@ -97,20 +99,25 @@ function startMorse(){
     let exeMorseWord = [];
     let inputWord = morseText.value;
 
-    if(wordTypeElement[0].checked){
-        exeMorseWord = convertAlphabetToMorse(inputWord);
-    }else if(wordTypeElement[1].checked){
-        alert("Not implemented.");
-    }
-
-    try{
-        if(!Array.isArray(exeMorseWord)){
-            throw new Error(exeMorseWord);
+    if (!isMorseExe){
+        isMorseExe = true;
+        if(wordTypeElement[0].checked){
+            exeMorseWord = convertAlphabetToMorse(inputWord);
+        }else if(wordTypeElement[1].checked){
+            alert("Not implemented.");
         }
 
-        exeMorse(exeMorseWord);
-    }catch (e) {
-        alert(e.message);
+        try{
+            if(!Array.isArray(exeMorseWord)){
+                throw new Error(exeMorseWord);
+            }
+
+            exeMorse(exeMorseWord);
+        }catch (e) {
+            alert(e.message);
+        }
+
+        isMorseExe = false;
     }
 }
     
@@ -163,6 +170,7 @@ function convertAlphabetToMorse(subjectWord){
 // モールス信号実行
 //================================
 async function exeMorse(exeMorseCode){
+    alert(exeMorseCode)(
     morseSound.muted = false;
 
     for(let i=0; i<exeMorseCode.length; i++){
