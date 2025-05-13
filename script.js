@@ -168,6 +168,7 @@ function convertAlphabetToMorse(subjectWord){
 //================================
 async function exeMorse(exeMorseCode){
     for(let i=0; i<exeMorseCode.length; i++){
+        alert(i);
         if(exeMorseCode[i] == 0){
             document.body.style.background = "red";
             playMorseSound(shortPoint);
@@ -191,6 +192,7 @@ async function exeMorse(exeMorseCode){
 // モールス音声再生処理
 //================================
 async function playMorseSound(playTime){
+    alert(playTime);
     morseSound.muted = false;
     morseSound.play();
     await sleep(playTime);
