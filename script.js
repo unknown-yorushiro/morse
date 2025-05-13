@@ -1,11 +1,11 @@
-/*sleep処理用定義*/
-const sleep = (time) => new Promise((resolve) => setTimeout(resolve, time));
-
-
-/* アルファベットのモールス信号辞書
- * 0: 短点
- * 1: 長点
- */
+//================================
+// モールス信号辞書
+// 0: 短点
+// 1: 長点
+// 2: 文字区切り(辞書外)
+// 3: 単語区切り(ユーザ指定の空白)
+//================================
+/* アルファベットモールス辞書 */
 let alphabetMorseDict = {
     "a": "01",
     "b": "1000",
@@ -33,58 +33,150 @@ let alphabetMorseDict = {
     "x": "1001",
     "y": "1011",
     "z": "1100",
+    "0": "11111",
+    "1": "01111",
+    "2": "00111",
+    "3": "00011",
+    "4": "00001",
+    "5": "00000",
+    "6": "10000",
+    "7": "11000",
+    "8": "11100",
+    "9": "11110",
+    ".": "010101",
+    ",": "110011",
+    ":": "111000",
+    "_": "001101",
+    "+": "01010",
+    "-": "100001",
+    "×": "1001",
+    "^": "000000",
+    "(": "10110",
+    ")": "101101",
+    "/": "10010",
+    "[": "000110",
+    "]": "000111",
+    "?": "001100",
+    ";": "000001",
+    "@": "011010",
+    "'": "011110",
+    "\"": "010010",
+    " ": "3"  //空白判定用
 }
+/* 日本語モールス辞書 */
 
-let morseText = document.getElementById('morseString');
-morseText.value = 'SOS';
-let morseButton = document.getElementById('morseButton');
 
-let shortPoint = 50;
+//================================
+// グローバル変数定義・初期値設定
+//================================
+/* 短点・長点時間設定(ミリ秒) */
+let shortPoint = 100;
 let longPoint = shortPoint * 3;
-function parseMorse(){
-    let inputMorse = morseText.value;
+
+/*各種Element取得*/
+let morseText = document.getElementById('morseString');
+let morseButton = document.getElementById('morseButton');
+let wordTypeElement = document.getElementsByName('wordType');
+
+/* 入力初期値設定 */
+morseText.value = 'SOS';
+wordTypeElement[0].checked = true;
+
+
+//================================
+// sleep処理用定義
+//================================
+const sleep = (time) => new Promise((resolve) => setTimeout(resolve, time));
+
+
+//================================
+// main関数のようなもの
+//================================
+function startMorse(){
+    let exeMorseWord = [];
+    let inputWord = morseText.value;
+
+    if(wordTypeElement[0].checked){
+        exeMorseWord = convertAlphabetToMorse(inputWord);
+    }
+
+    try{
+        if(!Array.isArray(exeMorseWord)){
+            throw new Error(exeMorseWord);
+        }
+
+        exeMorse(exeMorseWord);
+    }catch (e) {
+            alert(e.message);
+    }
+}
+    
+
+//================================
+// アルファベット→モールス変換
+//================================
+function convertAlphabetToMorse(subjectWord){
     let repMorse = [];
     let joinMorse = [];
-    inputMorse = inputMorse.toLowerCase();
-    let splitStr = inputMorse.split('');
-
-    for(let i=0; i<splitStr.length; i++){
-        repMorse[i] = alphabetMorseDict[splitStr[i]];
-    }
     
+
+    /* 大文字を小文字に変換する */
+    subjectWord = subjectWord.toLowerCase();
+    /* 入力された単語を1文字毎に区切る */
+    let splitWord = subjectWord.split('');
+
+    /* 辞書から対応するモールス信号を取得する */
+    for(let i=0; i<splitWord.length; i++){
+        repMorse[i] = alphabetMorseDict[splitWord[i]];
+        if(repMorse[i] === undefined){
+            return 'ERROR: Input Correct Word';
+        }
+    }
+
+    /* 全てのモールス信号を結合する */
     for(let i=0; i<repMorse.length; i++){
         let tempList = [];
-        if(repMorse[i] !== undefined){
+
+        /* 空文字ではない場合 */
+        if(repMorse[i] != 3){
             tempList = repMorse[i].split('');
-            tempList.push('');
-        }else if(repMorse[i] === undefined){
-            tempList.push('-1');
+            /* 次の文字が空白ではない、かつ終端ではない場合*/
+            if(!(i+1 == repMorse.length) && (repMorse[i+1] != 3)){
+                tempList.push('2');
+            }
+
+        /* 空文字の場合 */
+        }else if(repMorse[i] == 3){
+            tempList.push('3');
         }
 
         joinMorse = joinMorse.concat(tempList);
     }
-    joinMorse.pop();
 
-    exeMorse(joinMorse);
+    alert(joinMorse);
+    return joinMorse;
 
 }
 
-async function exeMorse(morseStr){
-    alert(morseStr);
-    for(let i=0; i<morseStr.length; i++){
-        if(!morseStr[i]){
-            await sleep(longPoint);
-        }else if(morseStr[i] == 0){
+
+//================================
+// モールス信号実行
+//================================
+async function exeMorse(exeMorseCode){
+    for(let i=0; i<exeMorseCode.length; i++){
+        if(exeMorseCode[i] == 0){
             document.body.style.background = "red";
             await sleep(shortPoint);
             document.body.style.background = "white";
             await sleep(shortPoint);
-        }else if(morseStr[i] == 1){
+        }else if(exeMorseCode[i] == 1){
             document.body.style.background = "red";
             await sleep(longPoint);
             document.body.style.background = "white";
             await sleep(shortPoint);
-        }else if(morseStr[i] == -1){
+        }else if(exeMorseCose[i] == 2){
+            await sleep(longPoint);
+        }else if(morseStr[i] == 3){
             await sleep(longPoint * 2);
         }
     }
