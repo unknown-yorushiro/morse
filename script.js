@@ -108,7 +108,7 @@ function startMorse(){
 
         exeMorse(exeMorseWord);
     }catch (e) {
-            alert(e.message);
+        alert(e.message);
     }
 }
     
@@ -153,7 +153,6 @@ function convertAlphabetToMorse(subjectWord){
 
         joinMorse = joinMorse.concat(tempList);
     }
-    alert(joinMorse);
 
     return joinMorse;
 }
