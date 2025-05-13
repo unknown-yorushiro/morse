@@ -170,7 +170,7 @@ function convertAlphabetToMorse(subjectWord){
 // モールス信号実行
 //================================
 async function exeMorse(exeMorseCode){
-    alert(exeMorseCode)(
+    alert(exeMorseCode);
     morseSound.muted = false;
 
     for(let i=0; i<exeMorseCode.length; i++){
