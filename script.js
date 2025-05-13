@@ -187,7 +187,7 @@ async function exeMorse(exeMorseCode){
 // モールス音声再生処理
 //================================
 async function playMorseSound(playTime){
-    alert(morseSound.muted)(
+    alert(morseSound.muted);
     morseSound.muted = false;
     morseSound.play();
     await sleep(playTime);
