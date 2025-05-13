@@ -76,6 +76,7 @@ let longPoint = shortPoint * 3;
 /*各種Element取得*/
 const morseText = document.getElementById('morseString');
 const morseButton = document.getElementById('morseButton');
+const debugModeElement = document.getElementById('debugMode');
 const wordTypeElement = document.getElementsByName('wordType');
 const morseSound = document.getElementById('morse');
 
@@ -85,6 +86,8 @@ wordTypeElement[0].checked = true;
 
 /* 処理実行中フラグ */
 let isMorseExe = false;
+/* デバッグモード実行フラグ */
+let isDebugMode = false;
 
 //================================
 // sleep処理用定義
@@ -98,6 +101,7 @@ const sleep = (time) => new Promise((resolve) => setTimeout(resolve, time));
 function startMorse(){
     let exeMorseWord = [];
     let inputWord = morseText.value;
+    isDebugMode = debugModeElement.checked;
 
     if (!isMorseExe){
         isMorseExe = true;
@@ -170,7 +174,8 @@ function convertAlphabetToMorse(subjectWord){
 // モールス信号実行
 //================================
 async function exeMorse(exeMorseCode){
-    alert(exeMorseCode);
+    if(isDebugMode) alert(exeMorseCode);
+
     morseSound.muted = false;
 
     for(let i=0; i<exeMorseCode.length; i++){
