@@ -174,7 +174,7 @@ async function exeMorse(exeMorseCode){
             await sleep(longPoint);
             document.body.style.background = "white";
             await sleep(shortPoint);
-        }else if(exeMorseCose[i] == 2){
+        }else if(exeMorseCode[i] == 2){
             await sleep(longPoint);
         }else if(exeMorseCode[i] == 3){
             await sleep(longPoint * 2);
