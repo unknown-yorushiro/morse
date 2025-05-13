@@ -43,7 +43,6 @@ let shortPoint = 100;
 let longPoint = shortPoint * 3;
 function parseMorse(){
     let inputMorse = morseText.value;
-    alert(inputMorse)
     let repMorse = [];
     let joinMorse = [];
     inputMorse = inputMorse.toLowerCase();
