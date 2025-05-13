@@ -39,7 +39,7 @@ let morseText = document.getElementById('morseString');
 morseText.value = 'SOS';
 let morseButton = document.getElementById('morseButton');
 
-let shortPoint = 100;
+let shortPoint = 50;
 let longPoint = shortPoint * 3;
 function parseMorse(){
     let inputMorse = morseText.value;
