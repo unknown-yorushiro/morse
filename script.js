@@ -176,13 +176,20 @@ async function exeMorse(exeMorseCode){
     for(let i=0; i<exeMorseCode.length; i++){
         if(exeMorseCode[i] == 0){
             document.body.style.background = "red";
-            //await sleep(shortPoint);
-            playMorseSound(shortPoint);
+            morseSound.play();
+            await sleep(shortPoint);
+            morseSound.pause();
+            
+            //playMorseSound(shortPoint);
             document.body.style.background = "white";
             await sleep(shortPoint);
         }else if(exeMorseCode[i] == 1){
             document.body.style.background = "red";
-            playMorseSound(longPoint);
+            morseSound.play();
+            await sleep(longPoint);
+            morseSound.pause();
+
+            //playMorseSound(longPoint);
             document.body.style.background = "white";
             await sleep(shortPoint);
         }else if(exeMorseCode[i] == 2){
@@ -200,6 +207,7 @@ async function exeMorse(exeMorseCode){
 
 //================================
 // モールス音声再生処理
+// ※点滅処理が正しく動作しないため未実装
 //================================
 async function playMorseSound(playTime){
     alert(playTime);
