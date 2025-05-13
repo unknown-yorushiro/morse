@@ -76,9 +76,10 @@ let longPoint = shortPoint * 3;
 /*各種Element取得*/
 const morseText = document.getElementById('morseString');
 const morseButton = document.getElementById('morseButton');
-const debugModeElement = document.getElementById('debugMode');
 const wordTypeElement = document.getElementsByName('wordType');
 const morseSound = document.getElementById('morse');
+const debugModeElement = document.getElementById('debugMode');
+const debugLog = document.querySelector('.debug-log');
 
 /* 入力初期値設定 */
 morseText.value = 'SOS';
@@ -231,5 +232,4 @@ function outputDebugLog(logText){
         allDebugLog = allDebugLog + logText + "<br>";
         debugLog.innerText = allDebugLog;
     }
-    
-    
+}
