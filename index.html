@@ -8,8 +8,12 @@
 </head>
 <body>
   <h1>Morse Code</h1>
-   <label>Input：<input type="text" id="morseString" size="40"></label>
-  <input type="button" onclick="parseMorse()" value="Execution">
+    <label>input：<input type="text" id="morseString" size="40"></label>
+    <br>
+    <input type="radio" name="wordType" value="alphabet">Alphabet
+     <input type="radio" name="wordType" value="japaneseSentence">Japanese Sentense
+     <br>
+   <input type="button" onclick="startMorse()" value="Check">
 
   <script src="script.js"></script>
 </body>
