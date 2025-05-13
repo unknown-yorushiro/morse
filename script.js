@@ -83,6 +83,10 @@ const morseSound = document.getElementById('morse');
 morseText.value = 'SOS';
 wordTypeElement[0].checked = true;
 
+/* 音声初期設定　*/
+morseSound.pause();
+morseSound.currentTime = 0;
+
 
 //================================
 // sleep処理用定義
@@ -99,6 +103,8 @@ function startMorse(){
 
     if(wordTypeElement[0].checked){
         exeMorseWord = convertAlphabetToMorse(inputWord);
+    }else if(wordTypeElement[1].checked){
+        alert("Not implemented.");
     }
 
     try{
@@ -119,7 +125,6 @@ function startMorse(){
 function convertAlphabetToMorse(subjectWord){
     let repMorse = [];
     let joinMorse = [];
-    
 
     /* 大文字を小文字に変換する */
     subjectWord = subjectWord.toLowerCase();
@@ -163,20 +168,17 @@ function convertAlphabetToMorse(subjectWord){
 //================================
 async function exeMorse(exeMorseCode){
     morseSound.muted = false;
+
     for(let i=0; i<exeMorseCode.length; i++){
         if(exeMorseCode[i] == 0){
             document.body.style.background = "red";
-            await sleep(shortPoint);
-            //playMorseSound(shortPoint);
+            //await sleep(shortPoint);
+            playMorseSound(shortPoint);
             document.body.style.background = "white";
             await sleep(shortPoint);
         }else if(exeMorseCode[i] == 1){
             document.body.style.background = "red";
-            morseSound.play();
-            await sleep(longPoint);
-            morseSound.pause();
-            morseSound.currentTime = 0;
-            //playMorseSound(longPoint);
+            playMorseSound(longPoint);
             document.body.style.background = "white";
             await sleep(shortPoint);
         }else if(exeMorseCode[i] == 2){
@@ -185,6 +187,8 @@ async function exeMorse(exeMorseCode){
             await sleep(longPoint * 2);
         }
     }
+
+    morseSound.muted = true;
 }
 
 
@@ -192,10 +196,8 @@ async function exeMorse(exeMorseCode){
 // モールス音声再生処理
 //================================
 async function playMorseSound(playTime){
-    morseSound.muted = false;
     morseSound.play();
     await sleep(playTime);
     morseSound.pause();
     morseSound.currentTime = 0;
-    morseSound.muted = true;
 }
