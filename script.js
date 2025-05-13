@@ -74,13 +74,18 @@ let shortPoint = 100;
 let longPoint = shortPoint * 3;
 
 /*各種Element取得*/
-let morseText = document.getElementById('morseString');
-let morseButton = document.getElementById('morseButton');
-let wordTypeElement = document.getElementsByName('wordType');
+const morseText = document.getElementById('morseString');
+const morseButton = document.getElementById('morseButton');
+const wordTypeElement = document.getElementsByName('wordType');
+const morseSound = document.getElementById('morse');
 
 /* 入力初期値設定 */
 morseText.value = 'SOS';
 wordTypeElement[0].checked = true;
+
+/*音声の初期化*/
+morseSound.pause();
+morseSound.currentTime = 0;
 
 
 //================================
@@ -152,10 +157,9 @@ function convertAlphabetToMorse(subjectWord){
 
         joinMorse = joinMorse.concat(tempList);
     }
-
     alert(joinMorse);
-    return joinMorse;
 
+    return joinMorse;
 }
 
 
@@ -166,12 +170,12 @@ async function exeMorse(exeMorseCode){
     for(let i=0; i<exeMorseCode.length; i++){
         if(exeMorseCode[i] == 0){
             document.body.style.background = "red";
-            await sleep(shortPoint);
+            playMorseSound(shortPoint);
             document.body.style.background = "white";
             await sleep(shortPoint);
         }else if(exeMorseCode[i] == 1){
             document.body.style.background = "red";
-            await sleep(longPoint);
+            playMorseSound(longPoint);
             document.body.style.background = "white";
             await sleep(shortPoint);
         }else if(exeMorseCode[i] == 2){
@@ -180,4 +184,15 @@ async function exeMorse(exeMorseCode){
             await sleep(longPoint * 2);
         }
     }
+}
+
+
+//================================
+// モールス音声再生処理
+//================================
+function playMorseSound(playTime){
+    morseSound.play();
+    await sleep(playTime);
+    morseSound.pause();
+    morseSound.currentTime = 0;
 }
