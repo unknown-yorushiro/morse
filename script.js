@@ -83,10 +83,6 @@ const morseSound = document.getElementById('morse');
 morseText.value = 'SOS';
 wordTypeElement[0].checked = true;
 
-/*音声の初期化*/
-morseSound.pause();
-morseSound.currentTime = 0;
-
 
 //================================
 // sleep処理用定義
@@ -168,7 +164,6 @@ function convertAlphabetToMorse(subjectWord){
 //================================
 async function exeMorse(exeMorseCode){
     for(let i=0; i<exeMorseCode.length; i++){
-        alert(i);
         if(exeMorseCode[i] == 0){
             document.body.style.background = "red";
             playMorseSound(shortPoint);
@@ -192,7 +187,7 @@ async function exeMorse(exeMorseCode){
 // モールス音声再生処理
 //================================
 async function playMorseSound(playTime){
-    alert(playTime);
+    alert(morseSound.muted)(
     morseSound.muted = false;
     morseSound.play();
     await sleep(playTime);
