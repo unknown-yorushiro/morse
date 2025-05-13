@@ -190,6 +190,8 @@ async function exeMorse(exeMorseCode){
         }else if(exeMorseCode[i] == 3){
             await sleep(longPoint * 2);
         }
+
+        morseSound.currentTime = 0;
     }
 
     morseSound.muted = true;
@@ -200,8 +202,8 @@ async function exeMorse(exeMorseCode){
 // モールス音声再生処理
 //================================
 async function playMorseSound(playTime){
+    alert(playTime);
     morseSound.play();
     await sleep(playTime);
     morseSound.pause();
-    morseSound.currentTime = 0;
 }
