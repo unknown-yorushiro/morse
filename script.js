@@ -83,9 +83,6 @@ const morseSound = document.getElementById('morse');
 morseText.value = 'SOS';
 wordTypeElement[0].checked = true;
 
-/* 音声初期設定　*/
-morseSound.currentTime = 0;
-
 
 //================================
 // sleep処理用定義
