@@ -8,13 +8,21 @@
 </head>
 <body>
   <h1>Morse Code</h1>
-    <label>input：<input type="text" id="morseString" size="40"></label>
-    <br>
-    <input type="radio" name="wordType" value="alphabet">Alphabet
-     <input type="radio" name="wordType" value="japaneseSentence">Japanese Sentense
-     <br>
-   <input type="button" onclick="startMorse()" value="Execution">
-   <audio id="morse" src="/assets/effects/morse.mp3" autoplay loop muted playsinline></audio>
+  
+  <label>input：<input type="text" id="morseString" size="40"></label>
+  <br>
+
+  <input type="radio" name="wordType" value="alphabet">Alphabet
+  <input type="radio" name="wordType" value="japaneseSentence">Japanese Sentense
+  <br>
+
+  <input type="checkbox" id="debugMode"/>
+  <label for="debugMode">Debug Mode</label>
+  <br>
+
+  <input type="button" onclick="startMorse()" value="Execution">
+
+  <audio id="morse" src="/assets/effects/morse.mp3" autoplay loop muted playsinline></audio>
   <script src="script.js"></script>
 </body>
 </html>
