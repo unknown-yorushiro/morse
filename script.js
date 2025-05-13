@@ -73,17 +73,19 @@ async function exeMorse(morseStr){
     alert(morseStr);
     for(let i=0; i<morseStr.length; i++){
         if(!morseStr[i]){
-            await sleep(shortPoint);
+            await sleep(longPoint);
         }else if(morseStr[i] == 0){
             document.body.style.background = "red";
             await sleep(shortPoint);
             document.body.style.background = "white";
+            await sleep(shortPoint);
         }else if(morseStr[i] == 1){
             document.body.style.background = "red";
             await sleep(longPoint);
-            document.body.style.background = "white"; 
+            document.body.style.background = "white";
+            await sleep(shortPoint);
         }else if(morseStr[i] == -1){
-            await sleep(longPoint);
+            await sleep(longPoint * 2);
         }
     }
 }
