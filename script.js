@@ -166,7 +166,8 @@ async function exeMorse(exeMorseCode){
     for(let i=0; i<exeMorseCode.length; i++){
         if(exeMorseCode[i] == 0){
             document.body.style.background = "red";
-            playMorseSound(shortPoint);
+            await sleep(shortPoint);
+            //playMorseSound(shortPoint);
             document.body.style.background = "white";
             await sleep(shortPoint);
         }else if(exeMorseCode[i] == 1){
@@ -187,7 +188,6 @@ async function exeMorse(exeMorseCode){
 // モールス音声再生処理
 //================================
 async function playMorseSound(playTime){
-    alert(morseSound.muted);
     morseSound.muted = false;
     morseSound.play();
     await sleep(playTime);
