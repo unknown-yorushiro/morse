@@ -84,7 +84,6 @@ morseText.value = 'SOS';
 wordTypeElement[0].checked = true;
 
 /* 音声初期設定　*/
-morseSound.pause();
 morseSound.currentTime = 0;
 
 
