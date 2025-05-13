@@ -176,7 +176,7 @@ async function exeMorse(exeMorseCode){
             await sleep(shortPoint);
         }else if(exeMorseCose[i] == 2){
             await sleep(longPoint);
-        }else if(morseStr[i] == 3){
+        }else if(exeMorseCode[i] == 3){
             await sleep(longPoint * 2);
         }
     }
