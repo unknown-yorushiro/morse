@@ -86,8 +86,9 @@ wordTypeElement[0].checked = true;
 
 /* 処理実行中フラグ */
 let isMorseExe = false;
-/* デバッグモード実行フラグ */
+/* デバッグモード用 */
 let isDebugMode = false;
+let allDebugLog = "";
 
 //================================
 // sleep処理用定義
@@ -115,7 +116,7 @@ function startMorse(){
             if(!Array.isArray(exeMorseWord)){
                 throw new Error(exeMorseWord);
             }
-
+            outputDebugLog(exeMorseWord);
             exeMorse(exeMorseWord);
         }catch (e) {
             alert(e.message);
@@ -220,3 +221,15 @@ async function playMorseSound(playTime){
     await sleep(playTime);
     morseSound.pause();
 }
+
+
+//================================
+// デバッグログ出力
+//================================
+function outputDebugLog(logText){
+    if (isDebugMode){
+        allDebugLog = allDebugLog + logText + "<br>";
+        debugLog.innerText = allDebugLog;
+    }
+    
+    
