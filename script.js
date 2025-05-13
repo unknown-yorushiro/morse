@@ -163,6 +163,7 @@ function convertAlphabetToMorse(subjectWord){
 // モールス信号実行
 //================================
 async function exeMorse(exeMorseCode){
+    morseSound.muted = false;
     for(let i=0; i<exeMorseCode.length; i++){
         if(exeMorseCode[i] == 0){
             document.body.style.background = "red";
@@ -172,7 +173,11 @@ async function exeMorse(exeMorseCode){
             await sleep(shortPoint);
         }else if(exeMorseCode[i] == 1){
             document.body.style.background = "red";
-            playMorseSound(longPoint);
+            morseSound.play();
+            await sleep(longPoint);
+            morseSound.pause();
+            morseSound.currentTime = 0;
+            //playMorseSound(longPoint);
             document.body.style.background = "white";
             await sleep(shortPoint);
         }else if(exeMorseCode[i] == 2){
