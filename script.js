@@ -107,6 +107,8 @@ function startMorse(){
 
     if (!isMorseExe){
         isMorseExe = true;
+        allDenugLog = "",
+        outputDebugLog("◼️Debug Log");
         if(wordTypeElement[0].checked){
             exeMorseWord = convertAlphabetToMorse(inputWord);
         }else if(wordTypeElement[1].checked){
@@ -176,8 +178,6 @@ function convertAlphabetToMorse(subjectWord){
 // モールス信号実行
 //================================
 async function exeMorse(exeMorseCode){
-    if(isDebugMode) alert(exeMorseCode);
-
     morseSound.muted = false;
 
     for(let i=0; i<exeMorseCode.length; i++){
@@ -230,6 +230,6 @@ async function playMorseSound(playTime){
 function outputDebugLog(logText){
     if (isDebugMode){
         allDebugLog = allDebugLog + logText + "<br>";
-        debugLog.innerText = allDebugLog;
+        debugLog.innerHTML = allDebugLog;
     }
 }
