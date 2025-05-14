@@ -199,16 +199,16 @@ function convertAlphabetToMorse(subjectWord){
         joinMorse = joinMorse.concat(tempList);
     }
 
-    let pointMorseStr = "";
+    let pointMorseCode = "";
     for(let i=0; i<joinMorse.length; i++){
         if(joinMorse[i] == 0){
-            pointMorseStr = pointMorseStr + "・";
+            pointMorseCode = pointMorseCode + "・";
         }else if(joinMorse[i] == 1){
-            pointMorseStr = pointMorseStr + "－";
+            pointMorseCode = pointMorseCode + "－";
         }else if(joinMorse[i] == 2){
             ;
         }else if(joinMorsr[i] == 3){
-            pointMorseStr = pointMorseStr + " ";
+            pointMorseCode = pointMorseCode + " ";
         }
     }
     outputDebugLog(arguments.callee.name, "Convert MorseCode: " + pointMorseCode);
