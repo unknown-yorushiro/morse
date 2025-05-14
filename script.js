@@ -105,11 +105,12 @@ function startMorse(){
     let inputWord = morseText.value;
     isDebugMode = debugModeElement.checked;
 
+    outputDebugLog("isMorseExe: " + isMorseExe);
     if (!isMorseExe){
         isMorseExe = true;
         allDenugLog = "",
         outputDebugLog("◼️Debug Log");
-        ourputDebugLog("isMorseExe: " + isMorseExe);
+        outputDebugLog("isMorseExe: " + isMorseExe);
         if(wordTypeElement[0].checked){
             exeMorseWord = convertAlphabetToMorse(inputWord);
         }else if(wordTypeElement[1].checked){
