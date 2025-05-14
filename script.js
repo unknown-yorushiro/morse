@@ -97,6 +97,25 @@ let allDebugLog = "";
 const sleep = (time) => new Promise((resolve) => setTimeout(resolve, time));
 
 
+//===============================================================
+// 現在時刻取得処理
+//===============================================================
+function getNowTime(){
+    let nowTime = 0;
+
+    const now = new Date();
+    const utc = now.toUTCString();
+    // 取得された文字列の「GMT」を除去する
+    const g = utc.replace('GMT', '');
+    // 除去された文字列を使用し、インスタンスする
+    const gDate = new Date(g);
+    const hours = gDate.getHours();
+    gDate.setHours(hours + 9);
+
+    return gDate.toISOString();
+}
+
+
 //================================
 // main関数のようなもの
 //================================
@@ -104,15 +123,15 @@ function startMorse(){
     let exeMorseWord = [];
     let inputWord = morseText.value;
     isDebugMode = debugModeElement.checked;
-    debugLog.innerHTML = '';
 
-    outputDebugLog("isMorseExe: " + isMorseExe);
-    outputDebugLog("allDebugLog: " + allDebugLog);
+    /* 連続実行を防止 */
     if (!isMorseExe){
         isMorseExe = true;
-        allDebugLog = "",
-        outputDebugLog("◼️Debug Log");
-        outputDebugLog("isMorseExe: " + isMorseExe);
+        /* 初期化 */
+        debugLog.innerHTML = "";
+        allDebugLog = "◼️Debug Log<br>";
+
+        outputDebugLog(arguments.callee.name, "isMorseExe: " + isMorseExe);
         if(wordTypeElement[0].checked){
             exeMorseWord = convertAlphabetToMorse(inputWord);
         }else if(wordTypeElement[1].checked){
@@ -123,12 +142,10 @@ function startMorse(){
             if(!Array.isArray(exeMorseWord)){
                 throw new Error(exeMorseWord);
             }
-            outputDebugLog(exeMorseWord);
+            outputDebugLog(arguments.callee.name, "Result Morse Parse: " + exeMorseWord);
             exeMorse(exeMorseWord);
-            isMorseExe = false;
         }catch (e) {
             alert(e.message);
-            isMorseExe = false;
         }
     }
 }
@@ -213,12 +230,13 @@ async function exeMorse(exeMorseCode){
     }
 
     morseSound.muted = true;
+    isMorseExe = false;
 }
 
 
 //================================
 // モールス音声再生処理
-// ※点滅処理が正しく動作しないため未実装
+// ※表示処理が正しく動作しないため未実装
 //================================
 async function playMorseSound(playTime){
     alert(playTime);
@@ -228,12 +246,26 @@ async function playMorseSound(playTime){
 }
 
 
+
 //================================
 // デバッグログ出力
 //================================
 function outputDebugLog(logText){
     if (isDebugMode){
-        allDebugLog = allDebugLog + logText + "<br>";
+        let nowTime = getNowTime();
+
+        allDebugLog = allDebugLog + nowTime + "" + logText + "<br>";
+        debugLog.innerHTML = allDebugLog;
+    }
+}
+
+//================================
+// デバッグログ出力
+//================================
+function outputDebugLog(funcName, logText){
+    if (isDebugMode){
+        allDebugLog = allDebugLog + nowTime + "[" + 
+                        funcName + "]" + logText + "<br>";
         debugLog.innerHTML = allDebugLog;
     }
 }
