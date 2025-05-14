@@ -119,7 +119,7 @@ function getNowTime(){
 //================================
 // main関数のようなもの
 //================================
-function startMorse(){
+async function startMorse(){
     let exeMorseWord = [];
     let inputWord = morseText.value;
     isDebugMode = debugModeElement.checked;
@@ -146,6 +146,7 @@ function startMorse(){
             }
             outputDebugLog(arguments.callee.name, "Result Morse Parse: " + exeMorseWord);
             exeMorse(exeMorseWord);
+            await sleep(20000); /* 非同期になってるので暫定対応 */
         }catch (e) {
             alert(e.message);
             isExeMorse = false;
@@ -207,7 +208,7 @@ function convertAlphabetToMorse(subjectWord){
             pointMorseCode = pointMorseCode + "－";
         }else if(joinMorse[i] == 2){
             ;
-        }else if(joinMorsr[i] == 3){
+        }else if(joinMorse[i] == 3){
             pointMorseCode = pointMorseCode + " ";
         }
     }
