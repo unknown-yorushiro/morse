@@ -87,7 +87,7 @@ morseText.value = 'SOS';
 wordTypeElement[0].checked = true;
 
 /* 処理実行中フラグ */
-var isMorseExe = false;
+let isMorseExe = false;
 /* デバッグモード用 */
 let isDebugMode = false;
 let allDebugLog = "";
@@ -212,7 +212,7 @@ function convertAlphabetToMorse(subjectWord){
 //================================
 async function exeMorse(exeMorseCode){
     outputDebugLog(arguments.callee.name, "Start Execution Morse Code.");
-    displayMorseCode(exeMorseCode);
+    displayMorse(exeMorseCode);
 
     morseSound.muted = false;
     for(let i=0; i<exeMorseCode.length; i++){
@@ -230,7 +230,6 @@ async function exeMorse(exeMorseCode){
             morseSound.play();
             await sleep(longPoint);
             morseSound.pause();
-
             //playMorseSound(longPoint);
             document.body.style.background = "white";
             await sleep(shortPoint);
@@ -247,7 +246,6 @@ async function exeMorse(exeMorseCode){
     isMorseExe = false;
 
     outputDebugLog(arguments.callee.name, "End Execution Morse Code.");
-    outputDebugLog(arguments.callee.name, "isMorseExe: " + isMorseExe);
 
     return true;
 }
@@ -256,7 +254,7 @@ async function exeMorse(exeMorseCode){
 //================================
 // モールス信号(短点・長点)出力
 //================================
-function displayMorseCode(splitMorseCode){
+function displayMorse(splitMorseCode){
     let pointMorseCode = "";
     for(let i=0; i<splitMorseCode.length; i++){
         if(splitMorseCode[i] == 0){
