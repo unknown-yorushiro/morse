@@ -131,6 +131,8 @@ function startMorse(){
         debugLog.innerHTML = "";
         allDebugLog = "◼️Debug Log<br>";
 
+        outputDebugLog(arguments.callee.name, "PROCESS START.");
+        outputDebugLog(arguments.callee.name, "Initial Value: inputWord -> " + inputWord + ", ShortPointSpeed -> " + shortPoint + "(ms)");
         outputDebugLog(arguments.callee.name, "isMorseExe: " + isMorseExe);
         if(wordTypeElement[0].checked){
             exeMorseWord = convertAlphabetToMorse(inputWord);
@@ -146,7 +148,10 @@ function startMorse(){
             exeMorse(exeMorseWord);
         }catch (e) {
             alert(e.message);
+            isExeMorse = false;
         }
+
+        outputDebugLog(arguments.callee.name, "PROCESS END.");
     }
 }
     
@@ -162,6 +167,9 @@ function convertAlphabetToMorse(subjectWord){
     subjectWord = subjectWord.toLowerCase();
     /* 入力された単語を1文字毎に区切る */
     let splitWord = subjectWord.split('');
+
+    outputDebugLog(arguments.callee.name, "Convert all small string: " + subjectWord);
+    outputDebugLog(arguments.callee.name, "Split word: " + splitWord);
 
     /* 辞書から対応するモールス信号を取得する */
     for(let i=0; i<splitWord.length; i++){
@@ -191,6 +199,20 @@ function convertAlphabetToMorse(subjectWord){
         joinMorse = joinMorse.concat(tempList);
     }
 
+    let pointMorseStr = "";
+    for(let i=0; i<joinMorse.length; i++){
+        if(joinMorse[i] == 0){
+            pointMorseStr = pointMorseStr + "・";
+        }else if(joinMorse[i] == 1){
+            pointMorseStr = pointMorseStr + "－";
+        }else if(joinMorse[i] == 2){
+            ;
+        }else if(joinMorsr[i] == 3){
+            pointMorseStr = pointMorseStr + " ";
+        }
+    }
+    outputDebugLog(arguments.callee.name, "Convert MorseCode: " + pointMorseCode);
+
     return joinMorse;
 }
 
@@ -200,6 +222,8 @@ function convertAlphabetToMorse(subjectWord){
 //================================
 async function exeMorse(exeMorseCode){
     morseSound.muted = false;
+
+    outputDebugLog(arguments.callee.name, "Start Execution Morse Code.");
 
     for(let i=0; i<exeMorseCode.length; i++){
         if(exeMorseCode[i] == 0){
@@ -231,6 +255,9 @@ async function exeMorse(exeMorseCode){
 
     morseSound.muted = true;
     isMorseExe = false;
+
+    outputDebugLog(arguments.callee.name, "End Execution Morse Code.");
+    outputDebugLog(arguments.callee.name, "isMorseExe: " + isMorseExe);
 }
 
 
