@@ -104,6 +104,7 @@ function startMorse(){
     let exeMorseWord = [];
     let inputWord = morseText.value;
     isDebugMode = debugModeElement.checked;
+    debugLog.innerHTML = '';
 
     outputDebugLog("isMorseExe: " + isMorseExe);
     outputDebugLog("allDebugLog: " + allDebugLog);
