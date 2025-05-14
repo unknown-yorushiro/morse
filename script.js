@@ -147,7 +147,7 @@ async function startMorse(){
                 throw new Error(exeMorseWord);
             }
             outputDebugLog(arguments.callee.name, "Result Parse MorseCode: " + exeMorseWord);
-            let exeResult = exeMorse(exeMorseWord);
+            await exeMorse(exeMorseWord);
             //await sleep(20000); /* 非同期になってるので暫定対応 */
         }catch (e) {
             alert(e.message);
@@ -246,8 +246,6 @@ async function exeMorse(exeMorseCode){
     isMorseExe = false;
 
     outputDebugLog(arguments.callee.name, "End Execution Morse Code.");
-
-    return true;
 }
 
 
