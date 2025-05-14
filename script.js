@@ -130,7 +130,7 @@ async function startMorse(){
         isMorseExe = true;
         /* 初期化 */
         debugLog.innerHTML = "";
-        displayMorseCode.innerHTML = "";
+        displayMorseCodeQuery.innerHTML = "";
         allDebugLog = "◼️Debug Log<br>";
         
         outputDebugLog(arguments.callee.name, "PROCESS START.");
