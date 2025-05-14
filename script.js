@@ -136,13 +136,13 @@ async function startMorse(){
         outputDebugLog(arguments.callee.name, "PROCESS START.");
         outputDebugLog(arguments.callee.name, "Initial Value: inputWord -> " + inputWord + ", ShortPointSpeed -> " + shortPoint + "(ms)");
         outputDebugLog(arguments.callee.name, "isMorseExe: " + isMorseExe);
-        if(wordTypeElement[0].checked){
-            exeMorseWord = convertAlphabetToMorse(inputWord);
-        }else if(wordTypeElement[1].checked){
-            alert("Not implemented.");
-        }
-
         try{
+            if(wordTypeElement[0].checked){
+                exeMorseWord = convertAlphabetToMorse(inputWord);
+            }else if(wordTypeElement[1].checked){
+                throw new Error("Not implemented.");
+            }
+    
             if(!Array.isArray(exeMorseWord)){
                 throw new Error(exeMorseWord);
             }
@@ -151,6 +151,8 @@ async function startMorse(){
             //await sleep(20000); /* 非同期になってるので暫定対応 */
         }catch (e) {
             alert(e.message);
+            outputDebugLog(arguments.callee.name, "ALERT: MESSAGE -> "
+                          + e.message);
             isMorseExe = false;
         }
 
