@@ -144,9 +144,9 @@ async function startMorse(){
             if(!Array.isArray(exeMorseWord)){
                 throw new Error(exeMorseWord);
             }
-            outputDebugLog(arguments.callee.name, "Result Morse Parse: " + exeMorseWord);
-            exeMorse(exeMorseWord);
-            await sleep(20000); /* 非同期になってるので暫定対応 */
+            outputDebugLog(arguments.callee.name, "Result Parse MorseCode: " + exeMorseWord);
+            result = exeMorse(exeMorseWord);
+            //await sleep(20000); /* 非同期になってるので暫定対応 */
         }catch (e) {
             alert(e.message);
             isExeMorse = false;
@@ -200,20 +200,6 @@ function convertAlphabetToMorse(subjectWord){
         joinMorse = joinMorse.concat(tempList);
     }
 
-    let pointMorseCode = "";
-    for(let i=0; i<joinMorse.length; i++){
-        if(joinMorse[i] == 0){
-            pointMorseCode = pointMorseCode + "・";
-        }else if(joinMorse[i] == 1){
-            pointMorseCode = pointMorseCode + "－";
-        }else if(joinMorse[i] == 2){
-            ;
-        }else if(joinMorse[i] == 3){
-            pointMorseCode = pointMorseCode + " ";
-        }
-    }
-    outputDebugLog(arguments.callee.name, "Convert MorseCode: " + pointMorseCode);
-
     return joinMorse;
 }
 
@@ -225,6 +211,20 @@ async function exeMorse(exeMorseCode){
     morseSound.muted = false;
 
     outputDebugLog(arguments.callee.name, "Start Execution Morse Code.");
+
+    let pointMorseCode = "";
+    for(let i=0; i<joinMorse.length; i++){
+        if(joinMorse[i] == 0){
+            pointMorseCode = pointMorseCode + "・";
+        }else if(joinMorse[i] == 1){
+            pointMorseCode = pointMorseCode + "－";
+        }else if(joinMorse[i] == 2){
+            pointMorseCode = pointMorseCode + "  ";
+        }else if(joinMorse[i] == 3){
+            pointMorseCode = pointMorseCode + "    ";
+        }
+    }
+    outputDebugLog(arguments.callee.name, "Convert MorseCode: " + pointMorseCode);
 
     for(let i=0; i<exeMorseCode.length; i++){
         if(exeMorseCode[i] == 0){
@@ -259,6 +259,8 @@ async function exeMorse(exeMorseCode){
 
     outputDebugLog(arguments.callee.name, "End Execution Morse Code.");
     outputDebugLog(arguments.callee.name, "isMorseExe: " + isMorseExe);
+
+    return true;
 }
 
 
