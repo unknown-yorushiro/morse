@@ -172,8 +172,8 @@ function convertAlphabetToMorse(subjectWord){
     /* 入力された単語を1文字毎に区切る */
     let splitWord = subjectWord.split('');
 
-    outputDebugLog(arguments.callee.name, "Convert all small string: " + subjectWord);
-    outputDebugLog(arguments.callee.name, "Split word: " + splitWord);
+    outputDebugLog(arguments.callee.name, "Convert All Small String: " + subjectWord);
+    outputDebugLog(arguments.callee.name, "Split Word: " + splitWord);
 
     /* 辞書から対応するモールス信号を取得する */
     for(let i=0; i<splitWord.length; i++){
@@ -211,7 +211,7 @@ function convertAlphabetToMorse(subjectWord){
 // モールス信号実行
 //================================
 async function exeMorse(exeMorseCode){
-    outputDebugLog(arguments.callee.name, "Start Execution Morse Code.");
+    outputDebugLog(arguments.callee.name, "Start Execution MorseCode.");
     displayMorse(exeMorseCode);
 
     morseSound.muted = false;
@@ -245,7 +245,7 @@ async function exeMorse(exeMorseCode){
     morseSound.muted = true;
     isMorseExe = false;
 
-    outputDebugLog(arguments.callee.name, "End Execution Morse Code.");
+    outputDebugLog(arguments.callee.name, "End Execution MorseCode.");
 }
 
 
@@ -267,9 +267,9 @@ function displayMorse(splitMorseCode){
     }
 
     displayMorseCodeQuery.innerHTML = "◼️MorseCode<br>" +
-                                            "InputWord: " + morseText.value +
-                                                "<br>MorseCode: " + pointMorseCode;
-    outputDebugLog(arguments.callee.name, "inputWord: " + morseText.value +
+                                            "Your InputWord: " + morseText.value +
+                                                "<br>Result MorseCode: " + pointMorseCode;
+    outputDebugLog(arguments.callee.name, "InputWord: " + morseText.value +
                      ", Convert MorseCode: " + pointMorseCode);
 }
 
