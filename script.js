@@ -80,6 +80,7 @@ const wordTypeElement = document.getElementsByName('wordType');
 const morseSound = document.getElementById('morse');
 const debugModeElement = document.getElementById('debugMode');
 const debugLog = document.querySelector('.debug-log');
+const displayMorseCode = document.querySelector('.display-morsecode');
 
 /* 入力初期値設定 */
 morseText.value = 'SOS';
@@ -129,8 +130,9 @@ async function startMorse(){
         isMorseExe = true;
         /* 初期化 */
         debugLog.innerHTML = "";
+        displayMorseCode.innerHTML = "";
         allDebugLog = "◼️Debug Log<br>";
-
+        
         outputDebugLog(arguments.callee.name, "PROCESS START.");
         outputDebugLog(arguments.callee.name, "Initial Value: inputWord -> " + inputWord + ", ShortPointSpeed -> " + shortPoint + "(ms)");
         outputDebugLog(arguments.callee.name, "isMorseExe: " + isMorseExe);
@@ -208,24 +210,10 @@ function convertAlphabetToMorse(subjectWord){
 // モールス信号実行
 //================================
 async function exeMorse(exeMorseCode){
-    morseSound.muted = false;
-
     outputDebugLog(arguments.callee.name, "Start Execution Morse Code.");
+    let result = displayMorseCode(exeMorseCode);
 
-    let pointMorseCode = "";
-    for(let i=0; i<joinMorse.length; i++){
-        if(joinMorse[i] == 0){
-            pointMorseCode = pointMorseCode + "・";
-        }else if(joinMorse[i] == 1){
-            pointMorseCode = pointMorseCode + "－";
-        }else if(joinMorse[i] == 2){
-            pointMorseCode = pointMorseCode + "  ";
-        }else if(joinMorse[i] == 3){
-            pointMorseCode = pointMorseCode + "    ";
-        }
-    }
-    outputDebugLog(arguments.callee.name, "Convert MorseCode: " + pointMorseCode);
-
+    morseSound.muted = false;
     for(let i=0; i<exeMorseCode.length; i++){
         if(exeMorseCode[i] == 0){
             document.body.style.background = "red";
@@ -259,6 +247,31 @@ async function exeMorse(exeMorseCode){
 
     outputDebugLog(arguments.callee.name, "End Execution Morse Code.");
     outputDebugLog(arguments.callee.name, "isMorseExe: " + isMorseExe);
+
+    return true;
+}
+
+
+//================================
+// モールス信号(短点・長点)出力
+//================================
+function displayMorseCode(splitMorseCode){
+    let pointMorseCode = "";
+    for(let i=0; i<splitMorseCode.length; i++){
+        if(splitMorseCode[i] == 0){
+            pointMorseCode = pointMorseCode + "・";
+        }else if(splitMorseCode[i] == 1){
+            pointMorseCode = pointMorseCode + "－";
+        }else if(splitMorseCode[i] == 2){
+            pointMorseCode = pointMorseCode + "  ";
+        }else if(splitMorseCode[i] == 3){
+            pointMorseCode = pointMorseCode + "    ";
+        }
+    }
+    displayMorseCode.innerHTML = "Original Word: " + morseText.value +
+                                      "<br>MorseCode: " + pointMorseCode;
+    outputDebugLog(arguments.callee.name, "inputWord: " + morseText.value +
+                     ", Convert MorseCode: " + pointMorseCode);
 
     return true;
 }
