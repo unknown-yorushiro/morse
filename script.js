@@ -86,7 +86,7 @@ morseText.value = 'SOS';
 wordTypeElement[0].checked = true;
 
 /* 処理実行中フラグ */
-let isMorseExe = false;
+var isMorseExe = false;
 /* デバッグモード用 */
 let isDebugMode = false;
 let allDebugLog = "";
