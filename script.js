@@ -106,9 +106,10 @@ function startMorse(){
     isDebugMode = debugModeElement.checked;
 
     outputDebugLog("isMorseExe: " + isMorseExe);
+    outputDebugLog("allDebugLog: " + allDebugLog);
     if (!isMorseExe){
         isMorseExe = true;
-        allDenugLog = "",
+        allDebugLog = "",
         outputDebugLog("◼️Debug Log");
         outputDebugLog("isMorseExe: " + isMorseExe);
         if(wordTypeElement[0].checked){
