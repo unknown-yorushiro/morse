@@ -266,8 +266,8 @@ function displayMorse(splitMorseCode){
         }
     }
 
-    displayMorseCodeQuery.innerHTML = "◼️Display Morse Code<br>" +
-                                            "Original Word: " + morseText.value +
+    displayMorseCodeQuery.innerHTML = "◼️MorseCode<br>" +
+                                            "InputWord: " + morseText.value +
                                                 "<br>MorseCode: " + pointMorseCode;
     outputDebugLog(arguments.callee.name, "inputWord: " + morseText.value +
                      ", Convert MorseCode: " + pointMorseCode);
