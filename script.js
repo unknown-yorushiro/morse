@@ -109,6 +109,7 @@ function startMorse(){
         isMorseExe = true;
         allDenugLog = "",
         outputDebugLog("◼️Debug Log");
+        ourputDebugLog("isMorseExe: " + isMorseExe);
         if(wordTypeElement[0].checked){
             exeMorseWord = convertAlphabetToMorse(inputWord);
         }else if(wordTypeElement[1].checked){
@@ -121,11 +122,11 @@ function startMorse(){
             }
             outputDebugLog(exeMorseWord);
             exeMorse(exeMorseWord);
+            isMorseExe = false;
         }catch (e) {
             alert(e.message);
+            isMorseExe = false;
         }
-
-        isMorseExe = false;
     }
 }
     
