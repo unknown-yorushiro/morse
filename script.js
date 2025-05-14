@@ -80,7 +80,7 @@ const wordTypeElement = document.getElementsByName('wordType');
 const morseSound = document.getElementById('morse');
 const debugModeElement = document.getElementById('debugMode');
 const debugLog = document.querySelector('.debug-log');
-const displayMorseCode = document.querySelector('.display-morsecode');
+const displayMorseCodeQuery = document.querySelector('.display-morsecode');
 
 /* 入力初期値設定 */
 morseText.value = 'SOS';
@@ -147,13 +147,14 @@ async function startMorse(){
                 throw new Error(exeMorseWord);
             }
             outputDebugLog(arguments.callee.name, "Result Parse MorseCode: " + exeMorseWord);
-            result = exeMorse(exeMorseWord);
+            let exeResult = exeMorse(exeMorseWord);
             //await sleep(20000); /* 非同期になってるので暫定対応 */
         }catch (e) {
             alert(e.message);
-            isExeMorse = false;
+            isMorseExe = false;
         }
 
+        outputDebugLog(arguments.callee.name, "isMorseExe: " + isMorseExe);
         outputDebugLog(arguments.callee.name, "PROCESS END.");
     }
 }
@@ -211,7 +212,7 @@ function convertAlphabetToMorse(subjectWord){
 //================================
 async function exeMorse(exeMorseCode){
     outputDebugLog(arguments.callee.name, "Start Execution Morse Code.");
-    let result = displayMorseCode(exeMorseCode);
+    displayMorseCode(exeMorseCode);
 
     morseSound.muted = false;
     for(let i=0; i<exeMorseCode.length; i++){
@@ -268,12 +269,12 @@ function displayMorseCode(splitMorseCode){
             pointMorseCode = pointMorseCode + "    ";
         }
     }
-    displayMorseCode.innerHTML = "Original Word: " + morseText.value +
-                                      "<br>MorseCode: " + pointMorseCode;
+
+    displayMorseCodeQuery.innerHTML = "◼️Display Morse Code<br>" +
+                                            "Original Word: " + morseText.value +
+                                                "<br>MorseCode: " + pointMorseCode;
     outputDebugLog(arguments.callee.name, "inputWord: " + morseText.value +
                      ", Convert MorseCode: " + pointMorseCode);
-
-    return true;
 }
 
 
