@@ -235,6 +235,20 @@ async function exeMorse(exeMorseCode){
 
 
 //================================
+// デバッグログ出力
+//================================
+function outputDebugLog(funcName, logText){
+    if (isDebugMode){
+        let nowTime = getNowTime();
+
+        allDebugLog = allDebugLog + nowTime + "[" + 
+                        funcName + "]" + logText + "<br>";
+        debugLog.innerHTML = allDebugLog;
+    }
+}
+
+
+//================================
 // モールス音声再生処理
 // ※表示処理が正しく動作しないため未実装
 //================================
@@ -243,29 +257,4 @@ async function playMorseSound(playTime){
     morseSound.play();
     await sleep(playTime);
     morseSound.pause();
-}
-
-
-
-//================================
-// デバッグログ出力
-//================================
-function outputDebugLog(logText){
-    if (isDebugMode){
-        let nowTime = getNowTime();
-
-        allDebugLog = allDebugLog + nowTime + "" + logText + "<br>";
-        debugLog.innerHTML = allDebugLog;
-    }
-}
-
-//================================
-// デバッグログ出力
-//================================
-function outputDebugLog(funcName, logText){
-    if (isDebugMode){
-        allDebugLog = allDebugLog + nowTime + "[" + 
-                        funcName + "]" + logText + "<br>";
-        debugLog.innerHTML = allDebugLog;
-    }
 }
