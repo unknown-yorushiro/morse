@@ -139,14 +139,14 @@ async function startMorse(){
         try{
             /* 短点閾値判定処理 */
             if((dotSpeedElement.value < 25) ||
-                (dotSpeedElement.value > 1000){
+                (dotSpeedElement.value > 1000)){
                 throw new Error("ERROR: Set Dot(・) Speed to between 20 and 1000(ms).");
             }else{
                 dotSpeed = dotSpeedElement.value;
                 dashSpeed = dotSpeed * 3;
             }
             outputDebugLog(arguments.callee.name, "Initial Value: inputWord -> " + inputWord + ", dotSpeed -> " + dotSpeed +
-                               "(ms)" + "dashSpeed -> " + dashSpeed + "(ms)");
+                               "(ms), dashSpeed -> " + dashSpeed + "(ms)");
 
             /* 実行するモールス信号種別の確認 */
             if(wordTypeElement[0].checked){
