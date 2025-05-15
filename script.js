@@ -80,7 +80,7 @@ const debugLog = document.querySelector('.debug-log');
 const displayMorseCodeQuery = document.querySelector('.display-morsecode');
 
 /* 入力初期値設定 */
-morseText.value = 'SOS';
+morseText.value = "SOS";
 dotSpeedElement.value = 100;
 wordTypeElement[0].checked = true;
 
@@ -192,7 +192,7 @@ function convertAlphabetToMorse(subjectWord){
     for(let i=0; i<splitWord.length; i++){
         repMorse[i] = alphabetMorseDict[splitWord[i]];
         if(repMorse[i] === undefined){
-            return 'ERROR: Input Correct Word';
+                        return "ERROR: Input Correct Word. Not Supported [ " + splitWord[i] + " ]";
         }
     }
 
