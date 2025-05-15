@@ -71,7 +71,7 @@ let alphabetMorseDict = {
 //================================
 /*各種Element取得*/
 const morseText = document.getElementById('morseString');
-const dotSpeedElement = document.getElementById('DotSpeed');
+const dotSpeedElement = document.getElementById('dotSpeed');
 const morseButton = document.getElementById('morseButton');
 const wordTypeElement = document.getElementsByName('wordType');
 const morseSound = document.getElementById('morse');
@@ -81,7 +81,7 @@ const displayMorseCodeQuery = document.querySelector('.display-morsecode');
 
 /* 入力初期値設定 */
 morseText.value = 'SOS';
-DotSpeedElement.value = 100;
+dotSpeedElement.value = 100;
 wordTypeElement[0].checked = true;
 
 /* 短点・長点時間設定(ミリ秒) */
