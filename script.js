@@ -69,12 +69,9 @@ let alphabetMorseDict = {
 //================================
 // グローバル変数定義・初期値設定
 //================================
-/* 短点・長点時間設定(ミリ秒) */
-let shortPoint = 100;
-let longPoint = shortPoint * 3;
-
 /*各種Element取得*/
 const morseText = document.getElementById('morseString');
+const pointSpeedElement = document.getElementById('pointSpeed');
 const morseButton = document.getElementById('morseButton');
 const wordTypeElement = document.getElementsByName('wordType');
 const morseSound = document.getElementById('morse');
@@ -84,8 +81,12 @@ const displayMorseCodeQuery = document.querySelector('.display-morsecode');
 
 /* 入力初期値設定 */
 morseText.value = 'SOS';
+pointSpeedElement.value = 100;
 wordTypeElement[0].checked = true;
 
+/* 短点・長点時間設定(ミリ秒) */
+let shortPoint = pointSpeedElement.value;
+let longPoint = shortPoint * 3;
 /* 処理実行中フラグ */
 let isMorseExe = false;
 /* デバッグモード用 */
@@ -121,22 +122,30 @@ function getNowTime(){
 // main関数のようなもの
 //================================
 async function startMorse(){
-    let exeMorseWord = [];
-    let inputWord = morseText.value;
-    isDebugMode = debugModeElement.checked;
-
-    /* 連続実行を防止 */
     if (!isMorseExe){
+        /* 連続実行を防止 */
         isMorseExe = true;
+        /* ローカル変数定義 */
+        let exeMorseWord = [];
+        let inputWord = morseText.value;
+        isDebugMode = debugModeElement.checked;
         /* 初期化 */
         debugLog.innerHTML = "";
         displayMorseCodeQuery.innerHTML = "";
         allDebugLog = "◼️Debug Log<br>";
         
         outputDebugLog(arguments.callee.name, "PROCESS START.");
-        outputDebugLog(arguments.callee.name, "Initial Value: inputWord -> " + inputWord + ", ShortPointSpeed -> " + shortPoint + "(ms)");
-        outputDebugLog(arguments.callee.name, "isMorseExe: " + isMorseExe);
+        outputDebugLog(arguments.callee.name, "Set isMorseExe: " + isMorseExe);
         try{
+            if((pointSpeedElement.value < 25) ||
+                (pointSpeedElement.value > 1000){
+                throw new Error("ERROR: Set the speed to between 20 and 1000(ms).");
+            else{
+                shortPoint = pointSpeedElement.value;
+                longPoint = shortPoint * 3;
+            }
+            outputDebugLog(arguments.callee.name, "Initial Value: inputWord -> " + inputWord + ", ShortPointSpeed -> " + shortPoint + "(ms)");
+            
             if(wordTypeElement[0].checked){
                 exeMorseWord = convertAlphabetToMorse(inputWord);
             }else if(wordTypeElement[1].checked){
@@ -148,7 +157,6 @@ async function startMorse(){
             }
             outputDebugLog(arguments.callee.name, "Result Parse MorseCode: " + exeMorseWord);
             await exeMorse(exeMorseWord);
-            //await sleep(20000); /* 非同期になってるので暫定対応 */
         }catch (e) {
             alert(e.message);
             outputDebugLog(arguments.callee.name, "ALERT: MESSAGE -> "
@@ -156,7 +164,7 @@ async function startMorse(){
             isMorseExe = false;
         }
 
-        outputDebugLog(arguments.callee.name, "isMorseExe: " + isMorseExe);
+        outputDebugLog(arguments.callee.name, "Set isMorseExe: " + isMorseExe);
         outputDebugLog(arguments.callee.name, "PROCESS END.");
     }
 }
