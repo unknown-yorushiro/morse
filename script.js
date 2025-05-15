@@ -139,7 +139,7 @@ async function startMorse(){
         try{
             if((pointSpeedElement.value < 25) ||
                 (pointSpeedElement.value > 1000){
-                throw new Error("ERROR: Set the speed to between 20 and 1000(ms).");
+                throw new Error("ERROR: Set ShortPoint Speed to between 20 and 1000(ms).");
             else{
                 shortPoint = pointSpeedElement.value;
                 longPoint = shortPoint * 3;
