@@ -71,7 +71,7 @@ let alphabetMorseDict = {
 //================================
 /*各種Element取得*/
 const morseText = document.getElementById('morseString');
-const pointSpeedElement = document.getElementById('pointSpeed');
+const dotSpeedElement = document.getElementById('DotSpeed');
 const morseButton = document.getElementById('morseButton');
 const wordTypeElement = document.getElementsByName('wordType');
 const morseSound = document.getElementById('morse');
@@ -81,12 +81,12 @@ const displayMorseCodeQuery = document.querySelector('.display-morsecode');
 
 /* 入力初期値設定 */
 morseText.value = 'SOS';
-pointSpeedElement.value = 100;
+DotSpeedElement.value = 100;
 wordTypeElement[0].checked = true;
 
 /* 短点・長点時間設定(ミリ秒) */
-let shortPoint = pointSpeedElement.value;
-let longPoint = shortPoint * 3;
+let dotSpeed = dotSpeedElement.value;
+let dashSpeed = dotSpeed * 3;
 /* 処理実行中フラグ */
 let isMorseExe = false;
 /* デバッグモード用 */
@@ -137,14 +137,15 @@ async function startMorse(){
         outputDebugLog(arguments.callee.name, "PROCESS START.");
         outputDebugLog(arguments.callee.name, "Set isMorseExe: " + isMorseExe);
         try{
-            if((pointSpeedElement.value < 25) ||
-                (pointSpeedElement.value > 1000){
-                throw new Error("ERROR: Set ShortPoint Speed to between 20 and 1000(ms).");
+            if((dotSpeedElement.value < 25) ||
+                (dotSpeedElement.value > 1000){
+                throw new Error("ERROR: Set Dot(・) Speed to between 20 and 1000(ms).");
             }else{
-                shortPoint = pointSpeedElement.value;
-                longPoint = shortPoint * 3;
+                dotSpeed = dotSpeedElement.value;
+                dashSpeed = shortPoint * 3;
             }
-            outputDebugLog(arguments.callee.name, "Initial Value: inputWord -> " + inputWord + ", ShortPointSpeed -> " + shortPoint + "(ms)");
+            outputDebugLog(arguments.callee.name, "Initial Value: inputWord -> " + inputWord + ", dotSpeed -> " + dotSpeed +
+                               "(ms)" + "dashSpeed -> " + dashSpeed + "(ms)");
             
             if(wordTypeElement[0].checked){
                 exeMorseWord = convertAlphabetToMorse(inputWord);
@@ -229,24 +230,24 @@ async function exeMorse(exeMorseCode){
         if(exeMorseCode[i] == 0){
             document.body.style.background = "red";
             morseSound.play();
-            await sleep(shortPoint);
+            await sleep(dotSpeed);
             morseSound.pause();
             
             //playMorseSound(shortPoint);
             document.body.style.background = "white";
-            await sleep(shortPoint);
+            await sleep(dotSpeed);
         }else if(exeMorseCode[i] == 1){
             document.body.style.background = "red";
             morseSound.play();
-            await sleep(longPoint);
+            await sleep(dashSpeed);
             morseSound.pause();
             //playMorseSound(longPoint);
             document.body.style.background = "white";
-            await sleep(shortPoint);
+            await sleep(dotSpeed);
         }else if(exeMorseCode[i] == 2){
-            await sleep(longPoint);
+            await sleep(dashSpeed);
         }else if(exeMorseCode[i] == 3){
-            await sleep(longPoint * 2);
+            await sleep(dashSpeed * 2);
         }
 
         morseSound.currentTime = 0;
