@@ -126,10 +126,13 @@ async function startMorse(){
         /* 連続実行を防止 */
         isMorseExe = true;
         /* ローカル変数定義 */
-        let exeMorseWord = [];
+        /* ユーザ指定値代入 */
         let inputWord = morseText.value;
         isDebugMode = debugModeElement.checked;
+        dotSpeed = dotSpeedElement.value;
+        dashSpeed = dotSpeed * 3;
         /* 初期化 */
+        let exeMorseWord = [];
         debugLog.innerHTML = "";
         displayMorseCodeQuery.innerHTML = "";
         allDebugLog = "◼️Debug Log<br>";
@@ -138,13 +141,16 @@ async function startMorse(){
         outputDebugLog(arguments.callee.name, "Set isMorseExe: " + isMorseExe);
         try{
             /* 短点閾値判定処理 */
-            if((dotSpeedElement.value < 25) ||
-                (dotSpeedElement.value > 1000)){
-                throw new Error("ERROR: Set Dot(・) Speed to between 20 and 1000(ms).");
-            }else{
-                dotSpeed = dotSpeedElement.value;
-                dashSpeed = dotSpeed * 3;
+            if((dotSpeed < 50) ||
+                (dotSpeed > 250)){
+                throw new Error("ERROR: Set Dot(・) Speed to between 50 and 250(ms).");
             }
+            /* 文字数閾値判定処理 */
+            if((inputWord.length == 0) ||
+                (inputWord.length > 100)){
+                throw new Error("ERROR: Set CheckWord length to between 1 and 100.");
+            }
+
             outputDebugLog(arguments.callee.name, "Initial Value: inputWord -> " + inputWord + ", dotSpeed -> " + dotSpeed +
                                "(ms), dashSpeed -> " + dashSpeed + "(ms)");
 
