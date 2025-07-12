@@ -235,7 +235,7 @@ async function exeMorse(exeMorseCode){
 
     // morseSound.muted = false;
     for(let i=0; i<exeMorseCode.length; i++){
-        morseSound.currentTime = 0;
+        morseSound.currentTime = 1;
         if(exeMorseCode[i] == 0){
             document.body.style.background = "red";
             morseSound.play();
