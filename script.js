@@ -233,8 +233,9 @@ async function exeMorse(exeMorseCode){
     outputDebugLog(arguments.callee.name, "Start Execution MorseCode.");
     displayMorse(exeMorseCode);
 
-    morseSound.muted = false;
+    // morseSound.muted = false;
     for(let i=0; i<exeMorseCode.length; i++){
+        morseSound.currentTime = 0;
         if(exeMorseCode[i] == 0){
             document.body.style.background = "red";
             morseSound.play();
@@ -257,11 +258,9 @@ async function exeMorse(exeMorseCode){
         }else if(exeMorseCode[i] == 3){
             await sleep(dashSpeed * 2);
         }
-
-        morseSound.currentTime = 0;
     }
 
-    morseSound.muted = true;
+    //morseSound.muted = true;
     isMorseExe = false;
 
     outputDebugLog(arguments.callee.name, "End Execution MorseCode.");
